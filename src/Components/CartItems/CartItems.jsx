@@ -43,12 +43,13 @@
 
 
 
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./CartItems.css";
 import cross_icon from "../Assets/cart_cross_icon.png";
 import { ShopContext } from "../../Context/ShopContext";
 import StripeCheckout from "react-stripe-checkout";
 import { useNavigate } from "react-router-dom";
+import PlaceOrder from '../PlaceOrder/PlaceOrder';
 
 const CartItems = () => {
   const { products, cartItems, removeFromCart, getTotalCartAmount, updateCart } = useContext(ShopContext);
@@ -60,7 +61,14 @@ const CartItems = () => {
     alert('Your Payment has been processed');
     navigate('/');
   };
-
+const [modalopen,setModalOpen] = useState(false);
+  const checkout = () =>{
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth" // Optional: Scroll behavior, smooth for smooth scrolling
+  });
+    setModalOpen(true);
+  }
   const incrementQuantity = (productId) => {
     const updatedCartItems = { ...cartItems };
     updatedCartItems[productId] += 1;
@@ -78,7 +86,8 @@ const CartItems = () => {
   
 
   return (
-    <div className="cartitems">
+    <>{modalopen&&<PlaceOrder close={()=>setModalOpen(false)}/>}
+        <div className="cartitems">
       <div className="cartitems-format-main">
         <p>Products</p>
         <p>Title</p>
@@ -144,7 +153,7 @@ const CartItems = () => {
             </div>
           </div>
           
-          <StripeCheckout
+          {/* <StripeCheckout
             name="Shoe Checkout"
             description="Please fill in the details below"
             amount={getTotalCartAmount() * 100}
@@ -152,8 +161,9 @@ const CartItems = () => {
             stripeKey={stripekey}
             token={onToken}
             billingAddress
-          
-          ><button>PROCEED TO CHECKOUT</button></StripeCheckout>
+          > */}
+            <button onClick={checkout}>PROCEED TO CHECKOUT</button>
+            {/* </StripeCheckout> */}
         </div>
         {/* <div className="cartitems-promocode">
           <p>If you have a promo code, Enter it here</p>
@@ -164,7 +174,8 @@ const CartItems = () => {
         {/* </div> */}
       </div>
     </div>
-  );
+    </>
+);
 };
 
 export default CartItems;

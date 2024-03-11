@@ -44,6 +44,7 @@ const LoginSignup = () => {
       body: JSON.stringify(formData),
     })
       .then((resp) => resp.json())
+      .then((resp)=>console.log(resp))
       .then((data) => {dataObj=data});
 
       if (dataObj.success) {

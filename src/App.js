@@ -60,6 +60,8 @@ import Search from './Pages/Search';
 import ProductList from './Components/SearchPage/SearchPage';
 import ProductDisplay from './Components/ProductDisplay/ProductDisplay';
 import Order from './Pages/Order';
+import PlaceOrder from './Components/PlaceOrder/PlaceOrder';
+
 
 function App() {
   return (
@@ -67,6 +69,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Shop gender="all" />} />
+        <Route path="/test" element={<PlaceOrder />} />
         <Route path="/mens" element={<ShopCategory banner={men_banner} category="men" />} />
         <Route path="/womens" element={<ShopCategory banner={women_banner} category="women" />} />
         <Route path="/kids" element={<ShopCategory banner={kid_banner} category="kid" />} />
@@ -79,6 +82,7 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<LoginSignup />} />
+       
       </Routes>
       <FooterControl />
     </Router>
