@@ -1,7 +1,7 @@
 import React from "react";
 import "./Hero.css";
 import hero_image from "../Assets/hero_image.png";
-import arrow_icon from "../Assets/arrow.png";
+// import arrow_icon from "../Assets/arrow.png";
 import { Parallax, ParallaxProvider } from "react-scroll-parallax";
 
 const Hero = () => {
@@ -14,10 +14,10 @@ const Hero = () => {
           <p>Step Up,</p>
           <p> Stand Out</p>
         </div>
-        <div className="hero-latest-btn">
+        {/* <div className="hero-latest-btn">
           <div>Newest Kicks Here</div>
           <img src={arrow_icon} alt="" />
-        </div>
+        </div> */}
       </div>
       <div className="hero-right">
       <Parallax speed={-10}>

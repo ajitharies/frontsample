@@ -97,7 +97,7 @@
 // export default Navbar;
 
 
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useLayoutEffect, useRef, useState } from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
 import logo from '../Assets/logo.png';
@@ -109,10 +109,18 @@ import login_icon from '../Assets/login_icon.png'
 import order_icon from '../Assets/order_icon.png'
 
 const Navbar = () => {
+  const [categories,setCategories] = useState([]);
   let [menu, setMenu] = useState("shop");
   const { getTotalCartItems } = useContext(ShopContext);
 
   const menuRef = useRef();
+
+  useLayoutEffect(()=>{
+    fetch('http://localhost:4000/categories')
+    .then((res) => res.json())
+    .then((data) => setCategories(data))
+    .then(console.log(categories))
+  },[])
 
   const dropdown_toggle = (e) => {
     menuRef.current.classList.toggle('nav-menu-visible');
@@ -139,6 +147,7 @@ const Navbar = () => {
         <li onClick={() => handleMenuClick("mens")}><Link to='/mens' style={{ textDecoration: 'none' }}>Men</Link>{menu === "mens" ? <hr /> : <></>}</li>
         <li onClick={() => handleMenuClick("womens")}><Link to='/womens' style={{ textDecoration: 'none' }}>Women</Link>{menu === "womens" ? <hr /> : <></>}</li>
         <li onClick={() => handleMenuClick("kids")}><Link to='/kids' style={{ textDecoration: 'none' }}>Kids</Link>{menu === "kids" ? <hr /> : <></>}</li>
+        {categories.map((item,i) => <li onClick={()=>{setMenu(item.id)}} key={i}><Link to={`/shopcategory/${item.id}`} style={{ textDecoration: 'none' }}>{item.name}</Link>{menu===item.id?<hr/>:<></>}</li>)}
       </ul>
       <div className="nav-login-cart">
         {localStorage.getItem('auth-token')
