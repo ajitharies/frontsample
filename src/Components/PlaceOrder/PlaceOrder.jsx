@@ -67,7 +67,7 @@ function PlaceOrder({ close }) {
         <>
             <div className='bgblur'>
                 <section className="container">
-                    <header>Registration Form</header>
+                    <header>Customer Details</header>
                     <form className="form" onSubmit={handleSubmit}>
                         <div className="input-box">
                             <label>Full Name</label>
@@ -106,7 +106,7 @@ function PlaceOrder({ close }) {
                             <div className="column">
                                 <div className="select-box">
                                     <select onChange={stateSelectHandler}>
-                                        <option hidden="">Country</option>
+                                        <option hidden="">State</option>
                                         {india.states.map((item, index) => (
                                             <option key={index} value={item.districts}>
                                                 {item.state}
@@ -128,7 +128,7 @@ function PlaceOrder({ close }) {
                                 </div>
                             </div>
                         </div>
-                        <button type="submit">Submit</button>
+                        <button type="submit">Proceed to Checkout</button>
                         <button onClick={close}>Cancel</button>
                     </form>
                 </section>
